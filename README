@@ -1,0 +1,3 @@
+Little flask app to cross match actors and movies, using a well known movie resource :-)
+
+Install Flask then: `python namer.py`

@@ -43,12 +43,15 @@ class Namer(object):
             ctx['links'] = dict(ctx['m1'].links.items() + ctx['m2'].links.items())
         if n == 1:
             ctx['m1'] = self.get_credits(ms[0])
+            #ctx['links'] = 
         return ctx
 
     @cache_this
     def get_credits(self, search):
         GOOG = 'http://www.google.com/search?btnI=1&q=site:imdb.com/name/+OR+site:imdb.com/title/+'
         url = get_redir(GOOG + urllib.quote(search))
+        if url is None:
+            return 
         m = Movor()
         m.is_ac = '/name/nm' in url
         page = retrieve(url)
@@ -92,5 +95,8 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=0, port=40870)
-
+    import sys
+    port = 80
+    if sys.argv[1:] and sys.argv[1]:
+        port = int(sys.argv[1])
+    app.run(debug=0, port=port)

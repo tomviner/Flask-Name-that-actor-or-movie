@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+
 {% from "_formhelpers.html" import render_field %}
 <form method="get" action="">
     {{ render_field(form.movor1) }} 
@@ -15,19 +19,26 @@
 
 {% if n == 1 %}
     <a href="{{ m1.url }}" target="_blank">{{ m1.title|safe }}</a> ({{ m1.typ }}) matches:<br>
+      <ul>
         {% for cred in cross %}
-            <a href="{{ cred }}" target="_blank">{{ links[cred] }}</a>{% if loop.revindex0 %},{% endif %}
+            <li><a href="http://imdb.com{{ cred }}" target="_blank">{{ links[cred] }}</a></li>
         {% else %}
             None found
-        {% endfor %}<br>    
+        {% endfor %}
+      </ul>
 {% elif (n == 2) %}
     <a href="{{ m1.url }}" target="_blank">{{ m1.title|safe }}</a> ({{ m1.typ }}) and
     <a href="{{ m2.url }}" target="_blank">{{ m2.title|safe }}</a> ({{ m2.typ }}) match:<br>
         {% for cred in cross %}
-            <a href="{{ cred }}" target="_blank">{{ links[cred] }}</a>{% if loop.revindex0 %},{% endif %}
+          <ul>
+            <li><a href="http://imdb.com{{ cred }}" target="_blank">{{ links[cred] }}</a></li>
+          </ul>
         {% else %}
             None found
         {% endfor %}<br>    
 {% else %}
     Please enter some actors or movies.
 {% endif %}
+
+</body>
+</html>
